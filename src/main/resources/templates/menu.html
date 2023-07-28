@@ -1,15 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Spa Menu</title>
-    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 <body>
 <h1>My Super Fancy Spa</h1>
-<div id = "clientProfile">
+<div id="clientProfile">
+    <h2>My profile</h2>
+    <p th:text="${name}"></p>
+    <p th:text="${skintype}"></p>
+    <p th:text="${manipedi}"></p>
 </div>
-<div id = "servicesMenu">
+<div id="servicesMenu">
+    <table>
+        <thead>
+        <tr>
+            <th>Appropriate Facials for your Skin Type</th>
+        </tr>
+        </thead>
+        <th:block th:each="facial :${appropriateFacials}">
+            <tr>
+                <td th:text="${facial}"></td>
+            </tr>
+        </th:block>
+
+    </table>
+    <table>
+        <div th:if="${manipedi.equals('manicure')}">
+            <h3>Manicure</h3>
+            <p th:replace="fragments :: manicureDescription">description</p>
+        </div>
+        <div th:if="${manipedi.equals('pedicure')}">
+            <h3>Pedicure</h3>
+            <p th:replace="fragments :: pedicureDescription">description</p>
+        </div>
+    </table>
+
+
 </div>
 </body>
 </html>
